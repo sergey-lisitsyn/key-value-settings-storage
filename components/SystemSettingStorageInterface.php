@@ -3,9 +3,9 @@ namespace sergeylisitsyn\settingsStorage\components;
 
 interface SystemSettingStorageInterface
 {
-    public function create();
+    public function create($key, $type, $default=null, $description=null);
     
-    public function get();
+    public function get($key);
     
-    public function set();
+    public function set($key, $value);
 }

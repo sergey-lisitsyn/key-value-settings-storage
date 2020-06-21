@@ -3,6 +3,7 @@
 namespace sergeylisitsyn\settingsStorage\models;
 
 use Yii;
+use sergeylisitsyn\settingsStorage\components\SystemSettingStorageInterface;
 
 /**
  * This is the model class for table "setting_storage".
@@ -14,7 +15,7 @@ use Yii;
  * @property string $default
  * @property string $description
  */
-class SettingStorage extends \yii\db\ActiveRecord
+class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorageInterface
 {
     /**
      * {@inheritdoc}
@@ -51,6 +52,35 @@ class SettingStorage extends \yii\db\ActiveRecord
             'default' => 'Default',
             'description' => 'Description',
         ];
+    }
+
+    public function create(
+        string $key,
+        int $type,
+        ?string $value = null,
+        ?string $default = null,
+        ?string $description = null
+    ) : self
+    {
+        $setting = new self;
+        $setting->name = $key;
+        $setting->type = $type;
+        $setting->default = $default;
+        $setting->description = $description;
+        
+        return $setting;
+    }
+
+    public function get($key) : self
+    {
+        return self::find()->byName($key)->one();
+    }
+
+    public function set($key, $value) : void
+    {
+        $setting = self::find()->byName($key)->one();
+        $setting->value = $value;
+        $setting->update();
     }
 
     /**

@@ -35,6 +35,15 @@ return [
     ],
 ];
 ```
+Add to components:
+```
+'components' => [
+    'settingsStorage' => [
+        'class' => 'sergeylisitsyn\settingsStorage\SystemSetting',
+        'storage' => 'sergeylisitsyn\settingsStorage\models\SettingStorage'
+    ],
+],
+```
 
 Usage
 -----

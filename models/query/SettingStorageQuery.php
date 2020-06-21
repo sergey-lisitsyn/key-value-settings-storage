@@ -9,11 +9,6 @@ namespace sergeylisitsyn\settingsStorage\models\query;
  */
 class SettingStorageQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
     /**
      * {@inheritdoc}
      * @return \sergeylisitsyn\settingsStorage\models\SettingStorage[]|array
@@ -30,5 +25,10 @@ class SettingStorageQuery extends \yii\db\ActiveQuery
     public function one($db = null)
     {
         return parent::one($db);
+    }
+    
+    public function byName($name)
+    {
+        return $this->andWhere(['name' => $name]);
     }
 }
