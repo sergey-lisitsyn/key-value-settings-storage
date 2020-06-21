@@ -36,7 +36,7 @@ return [
 ];
 ```
 Add to components:
-```
+```php
 'components' => [
     'settingsStorage' => [
         'class' => 'sergeylisitsyn\settingsStorage\SystemSetting',

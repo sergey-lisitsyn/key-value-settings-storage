@@ -54,7 +54,7 @@ class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorag
         ];
     }
 
-    public function create(
+    public static function create(
         string $key,
         int $type,
         ?string $value = null,
