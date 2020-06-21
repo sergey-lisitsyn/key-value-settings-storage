@@ -21,6 +21,20 @@ or add
 
 to the require section of your `composer.json` file.
 
+Add migration path to migrationNamespaces section in main config file.
+```php
+return [
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationNamespaces' => [
+                ...
+                'sergeylisitsyn\settingsStorage\migrations',
+            ],
+        ],
+    ],
+];
+```
 
 Usage
 -----
