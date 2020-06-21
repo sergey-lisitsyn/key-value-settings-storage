@@ -25,7 +25,19 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Once the extension is installed, simply use it in your code to create property  :
 
 ```php
-<?= \sergeylisitsyn\settingsStorage\AutoloadExample::widget(); ?>```
+<?=\sergeylisitsyn\settingsStorage\SystemSetting::create('settingName', $type, 'default value', 'Setting description'); ?>
+```
+Or retrieve value by the name :
+
+```php
+<?=\sergeylisitsyn\settingsStorage\SystemSetting::get('settingName'); ?>
+```
+Or set with name and value :
+
+```php
+<?=\sergeylisitsyn\settingsStorage\SystemSetting::set('settingName', 'value'); ?>
+```
+

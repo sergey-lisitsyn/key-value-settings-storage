@@ -13,9 +13,9 @@ class SystemSetting extends Component implements SystemSettingStorageInterface
         $this->storage = $storage;
     }
     
-    public function create($key, $type, $default) : SystemSettingStorageInterface
+    public function create($key, $type, $default=null, $description=null) : SystemSettingStorageInterface
     {
-        return $this->storage->create($key, $type, $default);
+        return $this->storage->create($key, $type, $default, $description);
     }
     
     public function get($key) : SystemSettingStorageInterface
