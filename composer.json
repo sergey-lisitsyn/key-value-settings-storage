@@ -1,0 +1,21 @@
+{
+    "name": "sergey-lisitsyn/yii2-key-value-settings-storage",
+    "description": "Storage in database for persist, retrieve and manage system settings for web application",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","key-value","settings"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SergeyLisitsyn",
+            "email": "sergey.lisitsyn@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "sergeylisitsyn\\settingsStorage\\": ""
+        }
+    }
+}
