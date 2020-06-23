@@ -71,7 +71,7 @@ class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorag
         return $setting;
     }
 
-    public function get($key) : self
+    public function get($key) : ?self
     {
         return self::find()->byName($key)->one();
     }
@@ -81,6 +81,16 @@ class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorag
         $setting = self::find()->byName($key)->one();
         $setting->value = $value;
         $setting->update();
+    }
+    
+    public static function listTypes()
+    {
+        return [
+            static::TYPE_STRING => static::TYPE_STRING_NAME,
+            static::TYPE_NUMBER => static::TYPE_NUMBER_NAME,
+            static::TYPE_BOOLEAN => static::TYPE_BOOLEAN_NAME,
+            static::TYPE_ARRAY => static::TYPE_ARRAY_NAME
+        ];
     }
 
     /**

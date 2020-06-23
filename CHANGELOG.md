@@ -1,7 +1,16 @@
 # Changelog
 
-
 ## [Unreleased]
+
+## [1.0.3] - 2020-06-21
+
+### Added
+
+- CRUD
+
+### Changed
+
+- Renamed changelog.md file
 
 ## [1.0.2] - 2020-06-21
 
