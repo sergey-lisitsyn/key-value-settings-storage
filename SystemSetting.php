@@ -1,54 +1,63 @@
 <?php
 namespace sergeylisitsyn\settingsStorage;
 
-use sergeylisitsyn\settingsStorage\components\SystemSettingStorageInterface;
 use yii\base\Component;
-use sergeylisitsyn\settingsStorage\components\SettingTypeFormatterInterface;
+use sergeylisitsyn\settingsStorage\components\SystemSettingStorageInterface;
 
 class SystemSetting extends Component implements SystemSettingStorageInterface
 {
-    private $_storage;
+    public $storage;
     
-    private $_formatter;
+    public $formatter;
     
-    public function __construct(
-        SystemSettingStorageInterface $storage, 
-        SettingTypeFormatterInterface $formatter
-    ) : void
+    public function init()
     {
-        $this->_storage = $storage;
-        $this->_formatter = $storage;
+        $this->storage = \Yii::createObject($this->storage);
+        $this->formatter = \Yii::createObject($this->formatter['class']);
     }
     
-    public static function create($key, $type, $value, $default=null, $description=null) : SystemSettingStorageInterface
+    public function create($key, $type, $value, $default=null, $description=null) : SystemSettingStorageInterface
     {
-        return $this->_storage::create($key, $type, $value, $default, $description);
+        return $this->storage::create($key, $type, $value, $default, $description);
+    }
+    
+    public function put($key, $type, $value, $default=null, $description=null) : bool
+    {
+        $set = $this->storage::create($key, $type, $value, $default, $description);
+        
+        return $set->save();
     }
     
     public function get($key) : ?SystemSettingStorageInterface
     {
-        return $this->_storage->get($key);
+        return $this->storage->get($key);
     }
     
     public function set($key, $value) : void
     {
-        $this->_storage->set($key, $value);
+        return $this->storage->set($key, $value);
     }
     
-    public static function getValue($key)
+    public function getValue($key)
     {
-        $set = $this->_formatter->format($this->get($key));
+        // echo '<b>'.__FILE__.' -- '.__LINE__.'</b><pre>'; var_dump($this->formatter); echo '</pre>'; die();
+        $set = $this->formatter->format($this->get($key));
         
-//         if ($set->type == static::TYPE_STRING) {
-//             return $set->value ? $set->value : $set->default;
-//         } elseif ($set->type == static::TYPE_NUMBER) {
-//             return $set->value ? $set->value : $set->default;
-//         } elseif ($set->type == static::TYPE_BOOLEAN) {
-//             return (int) $set->value ? true : false;
-//         } elseif ($set->type == static::TYPE_ARRAY) {
-//             return unserialize($set->value);
-//         } else {
-//             return null;
-//         }
+        //         if ($set->type == static::TYPE_STRING) {
+        //             return $set->value ? $set->value : $set->default;
+        //         } elseif ($set->type == static::TYPE_NUMBER) {
+        //             return $set->value ? $set->value : $set->default;
+        //         } elseif ($set->type == static::TYPE_BOOLEAN) {
+        //             return (int) $set->value ? true : false;
+        //         } elseif ($set->type == static::TYPE_ARRAY) {
+        //             return unserialize($set->value);
+        //         } else {
+        //             return null;
+        //         }
+    }
+    
+    public function remove($key)
+    {
+        return $this->storage->delete($key);
     }
 }

@@ -37,12 +37,35 @@ return [
 ```
 Add to components:
 ```php
-'components' => [
-    'settingsStorage' => [
-        'class' => 'sergeylisitsyn\settingsStorage\SystemSetting',
-        'storage' => 'sergeylisitsyn\settingsStorage\models\SettingStorage'
+return [
+    'components' => [
+        'settings-storage' => [
+            'class' => 'sergeylisitsyn\settingsStorage\SystemSetting',
+            'storage' => 'sergeylisitsyn\settingsStorage\models\SettingStorage',
+            'formatter' => [
+                'class' => 'sergeylisitsyn\settingsStorage\helper\SettingStorageFormatter',
+                'types' => [
+                    'sting' => '',
+                    'number' => '',
+                    'bool' => '',
+                    'array' => ''
+                ],
+            ],
+        ],
     ],
-],
+]
+```
+
+To access the module, you need to add this to your application configuration:
+```php
+<?php
+    ......
+    'modules' => [
+        'settings-storage' => [
+            'class' => 'sergeylisitsyn\settingsStorage\Module',
+        ],
+    ],
+    ......
 ```
 
 Usage
@@ -51,6 +74,14 @@ Usage
 Once the extension is installed, simply use it in your code to create property  :
 
 ```php
+$foo = Yii::$app->settingsStorage->create('foo', 0, 'bar', 'xyz', 'test');
+var_dump($foo->save());
+$foo = Yii::$app->settingsStorage->getValue('foo');
+var_dump($foo);
+$foo = Yii::$app->settingsStorage->set('foo', 1000000);
+$foo = Yii::$app->settingsStorage->getValue('foo');
+var_dump($foo);
+
 <?=\sergeylisitsyn\settingsStorage\SystemSetting::create('settingName', $type, 'default value', 'Setting description'); ?>
 ```
 Or retrieve value by the name :
