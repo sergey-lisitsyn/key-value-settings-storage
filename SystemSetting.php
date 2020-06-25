@@ -8,12 +8,11 @@ class SystemSetting extends Component implements SystemSettingStorageInterface
 {
     public $storage;
     
-    public $formatter;
+    public $formatters;
     
     public function init()
     {
         $this->storage = \Yii::createObject($this->storage);
-        $this->formatter = \Yii::createObject($this->formatter['class']);
     }
     
     public function create($key, $type, $value, $default=null, $description=null) : SystemSettingStorageInterface
@@ -33,31 +32,22 @@ class SystemSetting extends Component implements SystemSettingStorageInterface
         return $this->storage->get($key);
     }
     
-    public function set($key, $value) : void
+    public function set($key, $value)
     {
         return $this->storage->set($key, $value);
     }
     
     public function getValue($key)
     {
-        // echo '<b>'.__FILE__.' -- '.__LINE__.'</b><pre>'; var_dump($this->formatter); echo '</pre>'; die();
-        $set = $this->formatter->format($this->get($key));
+        $set = $this->get($key);
+        $formatter = \Yii::createObject($this->formatters[($set::listTypes()[$set->type])]);
+        $value = $formatter->format($set->value);
         
-        //         if ($set->type == static::TYPE_STRING) {
-        //             return $set->value ? $set->value : $set->default;
-        //         } elseif ($set->type == static::TYPE_NUMBER) {
-        //             return $set->value ? $set->value : $set->default;
-        //         } elseif ($set->type == static::TYPE_BOOLEAN) {
-        //             return (int) $set->value ? true : false;
-        //         } elseif ($set->type == static::TYPE_ARRAY) {
-        //             return unserialize($set->value);
-        //         } else {
-        //             return null;
-        //         }
+        return $value;
     }
     
     public function remove($key)
     {
-        return $this->storage->delete($key);
+        return $this->storage->remove($key);
     }
 }

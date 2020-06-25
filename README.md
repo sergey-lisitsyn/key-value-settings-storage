@@ -39,17 +39,14 @@ Add to components:
 ```php
 return [
     'components' => [
-        'settings-storage' => [
+        'settingsStorage' => [
             'class' => 'sergeylisitsyn\settingsStorage\SystemSetting',
             'storage' => 'sergeylisitsyn\settingsStorage\models\SettingStorage',
-            'formatter' => [
-                'class' => 'sergeylisitsyn\settingsStorage\helper\SettingStorageFormatter',
-                'types' => [
-                    'sting' => '',
-                    'number' => '',
-                    'bool' => '',
-                    'array' => ''
-                ],
+            'formatters' => [
+                'string' => 'sergeylisitsyn\settingsStorage\helper\StringStorageFormatter',
+                'number' => 'sergeylisitsyn\settingsStorage\helper\NumberStorageFormatter',
+                'bool' => 'sergeylisitsyn\settingsStorage\helper\BooleanStorageFormatter',
+                'array' => 'sergeylisitsyn\settingsStorage\helper\ArrayStorageFormatter'
             ],
         ],
     ],

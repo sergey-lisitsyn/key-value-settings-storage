@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [1.0.5] - 2020-06-25
+
+### Added
+
+- fixed delete method
+- added formaters
+- added search class
+
 ## [1.0.4] - 2020-06-25
 
 ### Added

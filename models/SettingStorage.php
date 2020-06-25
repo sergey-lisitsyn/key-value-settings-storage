@@ -2,7 +2,6 @@
 
 namespace sergeylisitsyn\settingsStorage\models;
 
-use Yii;
 use sergeylisitsyn\settingsStorage\components\SystemSettingStorageInterface;
 
 /**
@@ -84,7 +83,7 @@ class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorag
         return $setting->update();
     }
     
-    public function delete($key)
+    public function remove($key)
     {
         $setting = self::find()->byName($key)->one();
         
