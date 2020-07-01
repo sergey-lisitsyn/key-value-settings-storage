@@ -15,7 +15,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $foo = \Yii::$app->settingsStorage->getValue('foo');
         return $this->render('index');
     }
 }

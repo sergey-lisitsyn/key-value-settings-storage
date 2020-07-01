@@ -15,7 +15,7 @@ class m200621_154812_create_setting_storage_table extends Migration
     {
         $this->createTable('{{%setting_storage}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(255)->notNull(),
+            'name' => $this->string(255)->notNull()->unique(),
             'type' => $this->tinyInteger()->notNull(),
             'value' => $this->string(255)->null(),
             'default' => $this->string(255)->null(),

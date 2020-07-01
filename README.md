@@ -1,5 +1,5 @@
-Key - Value setting storage
-===========================
+Key - Value settings storage
+============================
 Storage in database for persist, retrieve and manage system settings for web application
 
 Installation
@@ -43,10 +43,10 @@ return [
             'class' => 'sergeylisitsyn\settingsStorage\SystemSetting',
             'storage' => 'sergeylisitsyn\settingsStorage\models\SettingStorage',
             'formatters' => [
-                'string' => 'sergeylisitsyn\settingsStorage\helper\StringStorageFormatter',
-                'number' => 'sergeylisitsyn\settingsStorage\helper\NumberStorageFormatter',
-                'bool' => 'sergeylisitsyn\settingsStorage\helper\BooleanStorageFormatter',
-                'array' => 'sergeylisitsyn\settingsStorage\helper\ArrayStorageFormatter'
+                'string' => 'sergeylisitsyn\settingsStorage\models\formatters\StringStorageFormatter',
+                'number' => 'sergeylisitsyn\settingsStorage\models\formatters\NumberStorageFormatter',
+                'bool' => 'sergeylisitsyn\settingsStorage\models\formatters\BooleanStorageFormatter',
+                'array' => 'sergeylisitsyn\settingsStorage\models\formatters\ArrayStorageFormatter'
             ],
         ],
     ],
@@ -68,27 +68,46 @@ To access the module, you need to add this to your application configuration:
 Usage
 -----
 
-Once the extension is installed, simply use it in your code to create property  :
+Once the extension is installed, simply use it in your code to create and persist property in storage :
 
 ```php
-$foo = Yii::$app->settingsStorage->create('foo', 0, 'bar', 'xyz', 'test');
-var_dump($foo->save());
-$foo = Yii::$app->settingsStorage->getValue('foo');
-var_dump($foo);
-$foo = Yii::$app->settingsStorage->set('foo', 1000000);
-$foo = Yii::$app->settingsStorage->getValue('foo');
-var_dump($foo);
-
-<?=\sergeylisitsyn\settingsStorage\SystemSetting::create('settingName', $type, 'default value', 'Setting description'); ?>
+$foo = Yii::$app->settingsStorage::create('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
+$foo->save();
+// or just
+$saved = Yii::$app->settingsStorage->put('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
 ```
-Or retrieve value by the name :
+Getting and setting value into storage :
+```php
+$fooVal = Yii::$app->settingsStorage->getValue('foo');
+echo($fooVal);
+Yii::$app->settingsStorage->set('foo', 'baz');
+$fooVal = Yii::$app->settingsStorage->getValue('foo');
+echo($fooVal);
+```
+Or just retrieve value by the name :
 
 ```php
-<?=\sergeylisitsyn\settingsStorage\SystemSetting::get('settingName'); ?>
+<?=Yii::$app->settingsStorage->getValue('foo'); ?>
 ```
-Or set with name and value :
+Or only set with name and value :
 
 ```php
-<?=\sergeylisitsyn\settingsStorage\SystemSetting::set('settingName', 'value'); ?>
+<?=Yii::$app->settingsStorage->set('foo', 'baz'); ?>
 ```
 
+Change setting type by name :
+
+```php
+<?=Yii::$app->settingsStorage->setType('foo', SystemSetting::TYPE_NUMBER); ?>
+<?=Yii::$app->settingsStorage->set('foo', 1000000); ?>
+```
+or change all properties by the edit method :
+
+```php
+<?php
+$foo = Yii::$app->settingsStorage->get('foo');
+$foo->edit('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
+$foo->save();
+?>
+```
+X11 License.

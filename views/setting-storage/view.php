@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model sergeylisitsyn\settingsStorage\models\SettingStorage */
 
 $this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Setting Storage module', 'url' => ['/admin/settings-storage']];
 $this->params['breadcrumbs'][] = ['label' => 'Setting Storages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -31,7 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'type',
+            [
+                'attribute' => 'type',
+                'format' => 'text',
+                'value' => function ($model) {
+                    return $model->listTypes()[$model->type];
+                }
+            ],
             'value',
             'default',
             'description:ntext',

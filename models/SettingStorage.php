@@ -56,18 +56,34 @@ class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorag
     public static function create(
         string $key,
         int $type,
-        ?string $value = null,
-        ?string $default = null,
-        ?string $description = null
+        ?string $value,
+        ?string $default,
+        ?string $description
     ) : self
     {
         $setting = new self;
         $setting->name = $key;
         $setting->type = $type;
+        $setting->value = $value;
         $setting->default = $default;
         $setting->description = $description;
         
         return $setting;
+    }
+    
+    public function edit(
+        string $key,
+        int $type,
+        ?string $value,
+        ?string $default,
+        ?string $description
+    ) : void
+    {
+        $this->name = $key;
+        $this->type = $type;
+        $this->value = $value;
+        $this->default = $default;
+        $this->description = $description;
     }
 
     public function get($key) : ?self
@@ -75,22 +91,30 @@ class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorag
         return self::find()->byName($key)->one();
     }
 
-    public function set($key, $value)
+    public function set($key, $value) : bool
     {
         $setting = self::find()->byName($key)->one();
         $setting->value = $value;
         
-        return $setting->update();
+        return (bool) $setting->update();
     }
     
-    public function remove($key)
+    public function setType($key, $type) : bool
+    {
+        $setting = self::find()->byName($key)->one();
+        $setting->type = $type;
+        
+        return (bool) $setting->update();
+    }
+    
+    public function remove($key) : bool
     {
         $setting = self::find()->byName($key)->one();
         
-        return $setting->delete();
+        return (bool) $setting->delete();
     }
     
-    public static function listTypes()
+    public static function listTypes() : array
     {
         return [
             static::TYPE_STRING => static::TYPE_STRING_NAME,

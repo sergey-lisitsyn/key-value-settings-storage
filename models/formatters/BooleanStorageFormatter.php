@@ -1,5 +1,5 @@
 <?php
-namespace sergeylisitsyn\settingsStorage\helper;
+namespace sergeylisitsyn\settingsStorage\models\formatters;
 
 class BooleanStorageFormatter
 {

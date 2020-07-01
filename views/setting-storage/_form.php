@@ -8,21 +8,31 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="setting-storage-form">
+<div class="setting-storage-form row">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+	<div class="col-md-4">
+    	<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+	</div>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+	<div class="col-md-4">
+    	<?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+	</div>
 
-    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+	<div class="col-md-4">
+    	<?= $form->field($model, 'default')->textInput(['maxlength' => true]) ?>
+	</div>
 
-    <?= $form->field($model, 'default')->textInput(['maxlength' => true]) ?>
+	<div class="col-md-4">
+    	<?= $form->field($model, 'type')->dropDownList($model->listTypes()) ?>
+	</div>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+	<div class="col-md-8">
+    	<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    </div>
 
-    <div class="form-group">
+    <div class="form-group col-md-12">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 

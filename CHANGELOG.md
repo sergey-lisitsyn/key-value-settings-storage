@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [1.0.6] - 2020-07-01
+
+### Added
+
+- Unit tests for component
+
+### Changed
+
+- Formatters moved to models/formatters folder
+- Changed methods in component
+- Changed SystemSettingStorageInterface
+- Changed SettingStorage model class in accordance with SystemSettingStorageInterface
+
 ## [1.0.5] - 2020-06-25
 
 ### Added

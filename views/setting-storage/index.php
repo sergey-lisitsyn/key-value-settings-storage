@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Setting Storages';
+$this->params['breadcrumbs'][] = ['label' => 'Setting Storage module', 'url' => ['/admin/settings-storage']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="setting-storage-index">
@@ -28,10 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'type',
+            [
+                'attribute' => 'type',
+                'format' => 'text',
+                'value' => function ($model) {
+                    return $model->listTypes()[$model->type];
+                }
+            ],
             'value',
             'default',
-            //'description:ntext',
+            'description:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
