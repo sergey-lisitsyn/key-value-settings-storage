@@ -19,8 +19,6 @@ interface SystemSettingStorageInterface
     
     const TYPE_ARRAY_NAME = 'array';
     
-    public function edit(string $key, int $type, ?string $value, ?string $default, ?string $description);
-    
     public function get($key);
     
     public function set($key, $value);

@@ -79,10 +79,10 @@ $saved = Yii::$app->settingsStorage->put('foo', SystemSetting::TYPE_STRING, 'bar
 Getting and setting value into storage :
 ```php
 $fooVal = Yii::$app->settingsStorage->getValue('foo');
-echo($fooVal);
+echo($fooVal); // bar
 Yii::$app->settingsStorage->set('foo', 'baz');
 $fooVal = Yii::$app->settingsStorage->getValue('foo');
-echo($fooVal);
+echo($fooVal); // baz
 ```
 Or just retrieve value by the name :
 
@@ -108,6 +108,8 @@ or change all properties by the edit method :
 $foo = Yii::$app->settingsStorage->get('foo');
 $foo->edit('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
 $foo->save();
+// or just
+Yii::$app->settingsStorage->update('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
 ?>
 ```
 X11 License.

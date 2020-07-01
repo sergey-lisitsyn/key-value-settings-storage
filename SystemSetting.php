@@ -26,17 +26,6 @@ class SystemSetting extends Component implements SystemSettingStorageInterface
             return $this->storage::create($key, $type, $value, $default, $description);
     }
     
-    public function edit(
-        string $key,
-        int $type,
-        ?string $value,
-        ?string $default,
-        ?string $description
-    ) : void
-    {
-        $this->storage->edit($key, $type, $value, $default, $description);
-    }
-    
     public function put(
         string $key,
         int $type,
@@ -50,6 +39,20 @@ class SystemSetting extends Component implements SystemSettingStorageInterface
         return (bool) $set->save();
     }
     
+    public function update(
+        string $key,
+        int $type,
+        ?string $value,
+        ?string $default = null,
+        ?string $description = null
+    ) : bool
+    {
+        $set = $this->storage->get($key);
+        $set->edit($key, $type, $value, $default, $description);
+        
+        return (bool) $set->update();
+    }
+    
     public function createOrUpdate(
         string $key,
         int $type,
@@ -59,9 +62,7 @@ class SystemSetting extends Component implements SystemSettingStorageInterface
     ) : bool
     {
         if ($this->isset($key)) {
-            $set = $this->storage->get($key);
-            $set->edit($key, $type, $value, $default, $description);
-            return (bool) $set->update();
+            return $this->update($key, $type, $value, $default, $description);
         } else {
             return $this->put($key, $type, $value, $default, $description);
         }
