@@ -3,8 +3,9 @@ namespace sergeylisitsyn\settingsStorage\models\formatters;
 
 use sergeylisitsyn\settingsStorage\components\ValueTypeFormatterInterface;
 
-class NumberStorageFormatter implements ValueTypeFormatterInterface
+class DefaultStorageFormatter implements ValueTypeFormatterInterface
 {
+    
     public function format($value)
     {
         return $value;

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model sergeylisitsyn\settingsStorage\models\SettingStorage */
 
 $this->title = 'Create Setting Storage';
-$this->params['breadcrumbs'][] = ['label' => 'Setting Storage module', 'url' => ['/admin/settings-storage']];
+$this->params['breadcrumbs'][] = ['label' => 'Setting Storage Module', 'url' => ['/admin/settings-storage']];
 $this->params['breadcrumbs'][] = ['label' => 'Setting Storages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

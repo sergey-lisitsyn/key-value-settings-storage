@@ -1,7 +1,7 @@
 <?php
 namespace sergeylisitsyn\settingsStorage\components;
 
-interface SystemSettingStorageInterface
+interface KeyValueStorageInterface
 {
     const TYPE_STRING = 0;
     

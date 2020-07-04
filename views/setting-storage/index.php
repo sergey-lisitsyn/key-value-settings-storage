@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Setting Storages';
-$this->params['breadcrumbs'][] = ['label' => 'Setting Storage module', 'url' => ['/admin/settings-storage']];
+$this->params['breadcrumbs'][] = ['label' => 'Setting Storage Module', 'url' => ['/admin/settings-storage']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="setting-storage-index">

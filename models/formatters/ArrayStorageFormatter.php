@@ -1,7 +1,9 @@
 <?php
 namespace sergeylisitsyn\settingsStorage\models\formatters;
 
-class ArrayStorageFormatter
+use sergeylisitsyn\settingsStorage\components\ValueTypeFormatterInterface;
+
+class ArrayStorageFormatter implements ValueTypeFormatterInterface
 {
     public function format($value)
     {

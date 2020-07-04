@@ -1,10 +1,12 @@
 <?php
 namespace sergeylisitsyn\settingsStorage\models\formatters;
 
-class BooleanStorageFormatter
+use sergeylisitsyn\settingsStorage\components\ValueTypeFormatterInterface;
+
+class BooleanStorageFormatter implements ValueTypeFormatterInterface
 {
     public function format($value)
     {
-        return (int) $set->value ? true : false;
+        return $set->value ? true : false;
     }
 }

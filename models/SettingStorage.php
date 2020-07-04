@@ -2,7 +2,7 @@
 
 namespace sergeylisitsyn\settingsStorage\models;
 
-use sergeylisitsyn\settingsStorage\components\SystemSettingStorageInterface;
+use sergeylisitsyn\settingsStorage\components\KeyValueStorageInterface;
 
 /**
  * This is the model class for table "setting_storage".
@@ -14,7 +14,7 @@ use sergeylisitsyn\settingsStorage\components\SystemSettingStorageInterface;
  * @property string $default
  * @property string $description
  */
-class SettingStorage extends \yii\db\ActiveRecord implements SystemSettingStorageInterface
+class SettingStorage extends \yii\db\ActiveRecord implements KeyValueStorageInterface
 {
     /**
      * {@inheritdoc}

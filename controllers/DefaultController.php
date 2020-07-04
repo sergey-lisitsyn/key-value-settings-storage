@@ -15,6 +15,15 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $readme = null;
+        
+        $readme = @file_get_contents(dirname(__DIR__) . '/README.md');
+        
+        return $this->render('index', ['readme' => $readme]);
+    }
+    
+    public function actionTest()
+    {
+        return $this->render('test');
     }
 }
