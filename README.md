@@ -23,7 +23,7 @@ to the require section of your `composer.json` file.
 
 Add migration path to migrationNamespaces section in main config file.
 ```php
-return [
+    ......
     'controllerMap' => [
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
@@ -32,12 +32,13 @@ return [
                 'sergeylisitsyn\settingsStorage\migrations',
             ],
         ],
-    ],
-];
+    ]
+    ......
 ```
+
 Add to components:
 ```php
-return [
+    ......
     'components' => [
         'settingsStorage' => [
             'class' => 'sergeylisitsyn\settingsStorage\SystemSetting',
@@ -49,13 +50,12 @@ return [
                 'array' => 'sergeylisitsyn\settingsStorage\models\formatters\ArrayStorageFormatter'
             ],
         ],
-    ],
-]
+    ]
+    ......
 ```
 
 To access the module, you need to add this to your application configuration:
 ```php
-<?php
     ......
     'modules' => [
         'settings-storage' => [
@@ -71,45 +71,50 @@ Usage
 Once the extension is installed, simply use it in your code to create and persist property in storage :
 
 ```php
-$foo = Yii::$app->settingsStorage::create('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
-$foo->save();
-// or just
-$saved = Yii::$app->settingsStorage->put('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
+	$foo = Yii::$app->settingsStorage::create('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
+	$foo->save();
+	// or just
+	$saved = Yii::$app->settingsStorage->put('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
 ```
+
 Getting and setting value into storage :
 ```php
-$fooVal = Yii::$app->settingsStorage->getValue('foo');
-echo($fooVal); // bar
-Yii::$app->settingsStorage->set('foo', 'baz');
-$fooVal = Yii::$app->settingsStorage->getValue('foo');
-echo($fooVal); // baz
+	$fooVal = Yii::$app->settingsStorage->getValue('foo');
+	echo($fooVal); // bar
+	Yii::$app->settingsStorage->set('foo', 'baz');
+	$fooVal = Yii::$app->settingsStorage->getValue('foo');
+	echo($fooVal); // baz
 ```
+
 Or just retrieve value by the name :
 
 ```php
-<?=Yii::$app->settingsStorage->getValue('foo'); ?>
+	<?=Yii::$app->settingsStorage->getValue('foo'); ?>
 ```
+
 Or only set with name and value :
 
 ```php
-<?=Yii::$app->settingsStorage->set('foo', 'baz'); ?>
+	<?=Yii::$app->settingsStorage->set('foo', 'baz'); ?>
 ```
 
 Change setting type by name :
 
 ```php
-<?=Yii::$app->settingsStorage->setType('foo', SystemSetting::TYPE_NUMBER); ?>
-<?=Yii::$app->settingsStorage->set('foo', 1000000); ?>
+	<?=Yii::$app->settingsStorage->setType('foo', SystemSetting::TYPE_NUMBER); ?>
+	<?=Yii::$app->settingsStorage->set('foo', 1000000); ?>
 ```
+
 or change all properties by the edit method :
 
 ```php
-<?php
-$foo = Yii::$app->settingsStorage->get('foo');
-$foo->edit('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
-$foo->save();
-// or just
-Yii::$app->settingsStorage->update('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
-?>
+	<?php
+	$foo = Yii::$app->settingsStorage->get('foo');
+	$foo->edit('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
+	$foo->save();
+	// or just
+	Yii::$app->settingsStorage->update('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
+	?>
 ```
+
 X11 License.

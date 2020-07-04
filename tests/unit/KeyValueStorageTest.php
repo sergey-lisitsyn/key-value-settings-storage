@@ -13,9 +13,7 @@ class KeyValueStorageTest extends \Codeception\Test\Unit
     
     protected function _before()
     {
-//         require(__DIR__ . '/../../../../../../vendor/autoload.php');
-//         require(__DIR__ . '/../../../../../../vendor/yiisoft/yii2/Yii.php');
-//         require_once 'models/KeyValueStorage.php';
+        // require_once __DIR__ . '/../../KeyValueStorage.php';
     }
 
     protected function _after()
@@ -24,6 +22,7 @@ class KeyValueStorageTest extends \Codeception\Test\Unit
 
     public function testCreate()
     {
+        echo '<b>'.__FILE__.' -- '.__LINE__.'</b><pre>'; var_dump(222); echo '</pre>'; die();
         $storage = new KeyValueStorage();
         $foo = $storage::create('foo', SettingStorage::TYPE_STRING, 'bar', 'xyz', 'test');
         

@@ -3,6 +3,7 @@
 namespace sergeylisitsyn\settingsStorage\controllers;
 
 use yii\web\Controller;
+use cebe\markdown\Markdown;
 
 /**
  * Default controller for the `settingsStorage` module
@@ -17,7 +18,9 @@ class DefaultController extends Controller
     {
         $readme = null;
         
-        $readme = @file_get_contents(dirname(__DIR__) . '/README.md');
+        $text = @file_get_contents(dirname(__DIR__) . '/README.md');
+        $parser = new Markdown();
+        $readme = $parser->parse($text);
         
         return $this->render('index', ['readme' => $readme]);
     }

@@ -2,11 +2,24 @@
 
 ## [Unreleased]
 
+## [1.0.8] - 2020-07-05
+### Added
+- Runtime values cache
+- Default formatter
+- set all and remove all actions in component
+- display readme in markdown parsed view on index default page
+- test action in default controller
+### Changed
+- readme
+- storage interface
+- formatter interface
+- bootstrap in test folder
+
 ## [1.0.7] - 2020-07-01
 ### Added
-- update method
+- update method in component
 ### Changed
-- create or update method
+- create or update method in component
 
 ## [1.0.6] - 2020-07-01
 ### Added

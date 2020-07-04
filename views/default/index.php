@@ -17,6 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'btn btn-warning',
             'title' => 'This action will create test key-value item in the storage.'
         ])?>
-        <pre><?=$readme; ?></pre>
+        <?=$readme; ?>
     </p>
 </div>
