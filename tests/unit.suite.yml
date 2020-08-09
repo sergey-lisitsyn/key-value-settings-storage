@@ -7,6 +7,6 @@ modules:
     enabled:
         - Asserts
         - \Helper\Unit
-        - Yii2:
-#            configFile: 'config/test.php'
-            part: init
+#        - Yii2:
+#           configFile: 'config/test-local.php'
+#           part: init

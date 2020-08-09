@@ -54,6 +54,14 @@ Add to components:
     ......
 ```
 
+And to bootstrap:
+```
+	'bootstrap' => [
+		...
+		'settingsStorage'
+	],
+```
+
 To access the module, you need to add this to your application configuration:
 ```php
     ......
@@ -71,50 +79,48 @@ Usage
 Once the extension is installed, simply use it in your code to create and persist property in storage :
 
 ```php
-	$foo = Yii::$app->settingsStorage::create('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
-	$foo->save();
-	// or just
-	$saved = Yii::$app->settingsStorage->put('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
+    $foo = Yii::$app->settingsStorage::create('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
+    $foo->save();
+    // or just
+    $saved = Yii::$app->settingsStorage->put('foo', SystemSetting::TYPE_STRING, 'bar', 'xyz', 'test');
 ```
 
 Getting and setting value into storage :
 ```php
-	$fooVal = Yii::$app->settingsStorage->getValue('foo');
-	echo($fooVal); // bar
-	Yii::$app->settingsStorage->set('foo', 'baz');
-	$fooVal = Yii::$app->settingsStorage->getValue('foo');
-	echo($fooVal); // baz
+    $fooVal = Yii::$app->settingsStorage->getValue('foo');
+    echo($fooVal); // bar
+    Yii::$app->settingsStorage->set('foo', 'baz');
+    $fooVal = Yii::$app->settingsStorage->getValue('foo');
+    echo($fooVal); // baz
 ```
 
 Or just retrieve value by the name :
 
 ```php
-	<?=Yii::$app->settingsStorage->getValue('foo'); ?>
+    Yii::$app->settingsStorage->getValue('foo');
 ```
 
 Or only set with name and value :
 
 ```php
-	<?=Yii::$app->settingsStorage->set('foo', 'baz'); ?>
+    Yii::$app->settingsStorage->set('foo', 'baz');
 ```
 
 Change setting type by name :
 
 ```php
-	<?=Yii::$app->settingsStorage->setType('foo', SystemSetting::TYPE_NUMBER); ?>
-	<?=Yii::$app->settingsStorage->set('foo', 1000000); ?>
+    Yii::$app->settingsStorage->setType('foo', SystemSetting::TYPE_NUMBER);
+    Yii::$app->settingsStorage->set('foo', 1000000);
 ```
 
 or change all properties by the edit method :
 
 ```php
-	<?php
-	$foo = Yii::$app->settingsStorage->get('foo');
-	$foo->edit('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
-	$foo->save();
-	// or just
-	Yii::$app->settingsStorage->update('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
-	?>
+    $foo = Yii::$app->settingsStorage->get('foo');
+    $foo->edit('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
+    $foo->save();
+    // or just
+    Yii::$app->settingsStorage->update('foo', SystemSetting::TYPE_STRING, 'baz', 'zyx', 'another description');
 ```
 
 X11 License.

@@ -7,6 +7,6 @@ class ArrayStorageFormatter implements ValueTypeFormatterInterface
 {
     public function format($value)
     {
-        return unserialize($value);
+        return is_array($value) ? $value : null;
     }
 }

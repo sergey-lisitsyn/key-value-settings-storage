@@ -23,8 +23,17 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
     
     public function init()
     {
+        parent::init();
+        
         $this->storage = Yii::createObject($this->storage);
         $this->setFormatter(Yii::createObject(DefaultStorageFormatter::class));
+        
+        $items = $this->storage::find()->all();
+        foreach ($items as $item) {
+            if ($item->name)
+                $this->values[$item->name] = ($item->value === '' || $item->value === null) ?
+                $item->default : $item->value;
+        }
     }
     
     public function setFormatter(ValueTypeFormatterInterface $formatter) : void
@@ -117,8 +126,10 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
     {
         if ($this->storage->set($key, $value)) {
             $this->values[$key] = $value;
+            
             return true;
         }
+        
         return false;
     }
     
@@ -139,14 +150,19 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
     {
         $value = ArrayHelper::getValue($this->values, $key, false);
         $this->setFormatter(Yii::createObject(DefaultStorageFormatter::class));
+        
         if ($value === false) {
             if (($item = $this->get($key)) !== null) {
                 $formatterType = $this->formatters[($item::listTypes()[$item->type])];
                 $this->setFormatter(Yii::createObject($formatterType));
+                if ($default === null) {
+                    $default = $item->default ?? null;
+                }
+                $value = $item->value ?? $default;
+                $this->values[$key] = $value;
             }
-            $value = $item->value ?? $default;
-            $this->values[$key] = $value;
         }
+        
         return $this->formatter->format($value);
     }
     

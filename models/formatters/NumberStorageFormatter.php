@@ -7,6 +7,6 @@ class NumberStorageFormatter implements ValueTypeFormatterInterface
 {
     public function format($value)
     {
-        return $value;
+        return floatval($value);
     }
 }
