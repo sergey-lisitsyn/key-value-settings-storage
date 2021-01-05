@@ -36,12 +36,12 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         }
     }
     
-    public function setFormatter(ValueTypeFormatterInterface $formatter) : void
+    public function setFormatter(ValueTypeFormatterInterface $formatter): void
     {
         $this->formatter = $formatter;
     }
     
-    public function getFormatter() : ValueTypeFormatterInterface
+    public function getFormatter(): ValueTypeFormatterInterface
     {
         return $this->formatter;
     }
@@ -52,7 +52,7 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         ?string $value,
         ?string $default,
         ?string $description
-    ) : ?KeyValueStorageInterface
+    ): ?KeyValueStorageInterface
     {
         return $this->storage::create($key, $type, $value, $default, $description);
     }
@@ -63,7 +63,7 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         ?string $value,
         ?string $default = null,
         ?string $description = null
-    ) : bool
+    ): bool
     {
         $item = $this->create($key, $type, $value, $default, $description);
         
@@ -80,7 +80,7 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         ?string $value,
         ?string $default = null,
         ?string $description = null
-    ) : bool
+    ): bool
     {
         $item = $this->get($key);
         
@@ -101,7 +101,7 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         ?string $value,
         ?string $default,
         ?string $description
-    ) : bool
+    ): bool
     {
         if ($this->isset($key)) {
             return $this->update($key, $type, $value, $default, $description);
@@ -110,19 +110,19 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         }
     }
     
-    public function get($key) : ?KeyValueStorageInterface
+    public function get($key): ?KeyValueStorageInterface
     {
         return $this->storage->get($key);
     }
     
-    public function setAll(array $values) : void
+    public function setAll(array $values): void
     {
         foreach ($values as $key => $value) {
             $this->set($key, $value);
         }
     }
     
-    public function set($key, $value) : bool
+    public function set($key, $value): bool
     {
         if ($this->storage->set($key, $value)) {
             $this->values[$key] = $value;
@@ -133,12 +133,12 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         return false;
     }
     
-    public function isset($key) : bool
+    public function isset($key): bool
     {
         return $this->storage->get($key) !== null;
     }
     
-    public function setType($key, $type) : bool
+    public function setType($key, $type): bool
     {
         return $this->storage->setType($key, $type);
     }
@@ -166,15 +166,39 @@ class KeyValueStorage extends Component implements KeyValueStorageInterface
         return $this->formatter->format($value);
     }
     
-    public function removeAll(array $keys) : void
+    public function removeAll(array $keys): void
     {
         foreach ($keys as $key) {
             $this->remove($key);
         }
     }
     
-    public function remove($key) : bool
+    public function remove($key): bool
     {
         return $this->storage->remove($key);
+    }
+
+    /**
+     * @param $value
+     * @param $type
+     * @return mixed
+     */
+    public function validate($value, $type)
+    {
+        $valid = false;
+
+        switch ($type) {
+            case KeyValueStorageInterface::TYPE_STRING :
+                $valid = is_string($value);
+                break;
+            case KeyValueStorageInterface::TYPE_NUMBER :
+                $valid = is_numeric($value);
+                break;
+            case KeyValueStorageInterface::TYPE_ARRAY :
+                $valid = is_array($value);
+                break;
+        }
+
+        return $valid ? $value : false;
     }
 }

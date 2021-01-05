@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.0.11] - 2021-01-05
+### Added
+- validator
+
 ## [0.0.10] - 2020-08-09
 ### Changed
 - array formatter
